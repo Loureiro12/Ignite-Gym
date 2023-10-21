@@ -22,7 +22,7 @@ export function Profile() {
   return (
     <VStack flex={1}>
       <ScreenHeader title="Perfil" />
-      <ScrollView>
+      <ScrollView paddingBottom={56}>
         <Center mt={6} px={10}>
           {photoIsLoading ? (
             <Skeleton

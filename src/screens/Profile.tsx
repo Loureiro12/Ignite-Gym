@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TouchableOpacity, Alert } from "react-native";
+import { TouchableOpacity } from "react-native";
 import {
   Center,
   ScrollView,
@@ -10,7 +10,7 @@ import {
   useToast,
 } from "native-base";
 import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from "expo-file-system";
 import { FileInfo } from "expo-file-system";
 
 import { ScreenHeader } from "@components/ScreenHeader";
@@ -18,12 +18,11 @@ import { UserPhoto } from "@components/UserPhoto";
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 
-
 const PHOTO_SIZE = 33;
 
 export function Profile() {
   const toast = useToast();
-  
+
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState("");
 
@@ -42,14 +41,16 @@ export function Profile() {
       }
 
       if (photoSelected.assets[0].uri) {
-        const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri) as FileInfo
+        const photoInfo = (await FileSystem.getInfoAsync(
+          photoSelected.assets[0].uri
+        )) as FileInfo;
 
-        if(photoInfo.size && (photoInfo.size  / 1024 / 1024 ) > 5){
+        if (photoInfo.size && photoInfo.size / 1024 / 1024 > 5) {
           return toast.show({
-            title: 'Essa imagem é muito grande. Escolha uma de até 5MB.',
-            placement: 'top',
-            bgColor: 'red.500'
-          })
+            title: "Essa imagem é muito grande. Escolha uma de até 5MB.",
+            placement: "top",
+            bgColor: "red.500",
+          });
         }
 
         setUserPhoto(photoSelected.assets[0].uri);

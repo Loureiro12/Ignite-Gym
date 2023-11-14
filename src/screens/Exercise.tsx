@@ -48,7 +48,7 @@ export function Exercise() {
   async function fetchExerciseDetails() {
     try {
       setIsLoading(true);
-      const response = await api.get(`exercises/${exerciseId}`);
+      const response = await api.get(`/exercises/${exerciseId}`);
       setExercise(response.data);
     } catch (error) {
       const isAppError = error instanceof AppError;
